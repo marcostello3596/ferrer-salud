@@ -36,11 +36,12 @@ const body = `<div id="root">${ssr}</div>
 // Página para publicar (el visor agrega doctype, head y body).
 writeFileSync(resolve(out, 'index.html'), `${head}\n${body}\n`);
 
-// Copia local completa para revisar con un navegador.
+// Copia local completa para revisar con un navegador y para hosting en dist/
 const skeleton = `<!doctype html><html lang="es-AR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style>
 ${head}</head><body>${body}</body></html>`;
 writeFileSync(resolve(out, 'preview.html'), skeleton);
+writeFileSync(resolve(root, 'dist/index.html'), skeleton);
 
 cpSync(resolve(root, 'public/assets'), resolve(out, 'assets'), { recursive: true });
 
